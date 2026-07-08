@@ -1,0 +1,109 @@
+{
+  "name": "PestCo High Score Lead Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "pestco-high-score-lead",
+        "responseMode": "lastNode"
+      },
+      "id": "webhook-high-score-lead",
+      "name": "Webhook - Receive Scored Lead",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{$json.lead_score}}",
+              "operation": "largerEqual",
+              "value2": 75
+            }
+          ]
+        }
+      },
+      "id": "if-score-75",
+      "name": "IF - Score >= 75",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [520, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "text",
+              "value": "={{'High-priority pest lead: ' + $json.contact_name + ' - Score ' + $json.lead_score}}"
+            }
+          ]
+        }
+      },
+      "id": "slack-notify",
+      "name": "Slack - Notify Sales",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2,
+      "position": [800, 220]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/mock-ghl-webhook",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "leadId",
+              "value": "={{$json.lead_id}}"
+            }
+          ]
+        }
+      },
+      "id": "mock-ghl-webhook",
+      "name": "HTTP - Mock GHL Opportunity",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [800, 380]
+    }
+  ],
+  "connections": {
+    "Webhook - Receive Scored Lead": {
+      "main": [
+        [
+          {
+            "node": "IF - Score >= 75",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF - Score >= 75": {
+      "main": [
+        [
+          {
+            "node": "Slack - Notify Sales",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP - Mock GHL Opportunity",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {}
+}
