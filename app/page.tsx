@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Activity, Gauge, Send, TableProperties, Workflow } from "lucide-react";
+import {
+  Activity,
+  ArrowRight,
+  Gauge,
+  Send,
+  ShieldCheck,
+  TableProperties,
+  Workflow,
+} from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
 
 const steps = [
@@ -25,9 +33,15 @@ const steps = [
   },
 ];
 
+const metrics = [
+  { value: "75+", label: "CRM route score" },
+  { value: "24h", label: "service-response lens" },
+  { value: "9", label: "realistic pest scenarios" },
+];
+
 export default function Home() {
   return (
-    <main className="page-shell">
+    <main className="page-shell home-shell">
       <header className="topbar">
         <div className="brand">
           <div className="brand-mark">
@@ -43,25 +57,49 @@ export default function Home() {
       </header>
 
       <section className="hero-grid">
-        <div>
-          <p className="eyebrow">AI specialist portfolio demo</p>
+        <div className="hero-copy">
+          <div className="hero-kicker">
+            <span className="eyebrow">AI specialist portfolio demo</span>
+            <span className="signal-pill">
+              <ShieldCheck size={14} />
+              Wise House-fit workflow
+            </span>
+          </div>
           <h1>PestCo AI Lead Automation</h1>
           <p className="lede">
-            AI-powered lead qualification and CRM automation demo for pest
-            control businesses. It scores inbound requests, recommends next
-            actions, and simulates GoHighLevel-style pipeline automation.
+            A recruiter-ready demo shaped for a modern pest-control operation:
+            fast lead triage, family-safe service context, CRM routing, and
+            dashboard reporting for leadership.
           </p>
 
+          <div className="hero-actions">
+            <Link className="primary-link" href="/dashboard">
+              View dashboard
+              <ArrowRight size={16} />
+            </Link>
+            <span className="runtime-note">Mock AI runs without an OpenAI key.</span>
+          </div>
+
+          <div className="ops-summary" aria-label="Demo operating targets">
+            {metrics.map((metric) => (
+              <div className="ops-metric" key={metric.label}>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </div>
+            ))}
+          </div>
+
           <div className="workflow-strip" aria-label="Workflow overview">
-            {steps.map((step) => (
+            {steps.map((step, index) => (
               <div className="workflow-step" key={step.title}>
+                <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
                 <strong>{step.title}</strong>
                 <span>{step.text}</span>
               </div>
             ))}
           </div>
 
-          <div className="dashboard-grid">
+          <div className="feature-grid">
             <div className="panel metric-card">
               <Gauge size={22} />
               <h3>Deterministic mock AI</h3>

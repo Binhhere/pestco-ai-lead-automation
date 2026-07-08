@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { Button } from "@astryxdesign/core/Button";
-import { Card } from "@astryxdesign/core/Card";
+import { Badge } from "@astryxdesign/core/Badge";
 import type { LeadInput } from "@/lib/validations";
 
 const initialForm: LeadInput = {
@@ -58,11 +58,23 @@ export function LeadForm() {
   }
 
   return (
-    <Card padding={0}>
-      <div className="panel-header">
+    <section className="lead-form-card" aria-labelledby="lead-form-title">
+      <div className="lead-form-topline">
+        <Badge label="Lead intake" variant="success" />
+        <span>CRM-ready routing</span>
+      </div>
+      <div className="panel-header form-panel-header">
         <div>
-          <p className="eyebrow">Lead intake</p>
-          <h2>Qualify a new pest control lead</h2>
+          <p className="eyebrow">Live scoring console</p>
+          <h2 id="lead-form-title">Qualify a new pest control lead</h2>
+          <p>
+            Submit the sample request to see score, urgency, recommended reply,
+            and automation routing.
+          </p>
+        </div>
+        <div className="form-score-preview" aria-label="Example score threshold">
+          <span>Route at</span>
+          <strong>75+</strong>
         </div>
       </div>
       <form className="panel-body" onSubmit={handleSubmit}>
@@ -156,6 +168,6 @@ export function LeadForm() {
           <p className={`status-message${isError ? " error" : ""}`}>{message}</p>
         ) : null}
       </form>
-    </Card>
+    </section>
   );
 }
