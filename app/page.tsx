@@ -9,27 +9,65 @@ import {
   Workflow,
 } from "lucide-react";
 import { LeadForm } from "@/components/LeadForm";
+import { Accordion, type AccordionItem } from "@/components/Accordion";
 
-const steps = [
+const stepItems: AccordionItem[] = [
   {
+    id: "step-1",
+    eyebrow: "WO-01",
     title: "Lead intake",
-    text: "Customer submits service details through the public form.",
+    description: "Customer submits service details through the public form.",
   },
   {
+    id: "step-2",
+    eyebrow: "WO-02",
     title: "AI scoring",
-    text: "Mock or real AI classifies urgency, pest type, score, and next action.",
+    description: "Mock or real AI classifies urgency, pest type, score, and next action.",
   },
   {
+    id: "step-3",
+    eyebrow: "WO-03",
     title: "CRM pipeline",
-    text: "Qualified leads are stored with status and sales context.",
+    description: "Qualified leads are stored with status and sales context.",
   },
   {
+    id: "step-4",
+    eyebrow: "WO-04",
     title: "Automation log",
-    text: "High-score leads trigger the mock GoHighLevel workflow.",
+    description: "High-score leads trigger the mock GoHighLevel workflow.",
   },
   {
+    id: "step-5",
+    eyebrow: "WO-05",
     title: "Dashboard",
-    text: "Operators track response priority, funnel health, and reporting.",
+    description: "Operators track response priority, funnel health, and reporting.",
+  },
+];
+
+const capabilityItems: AccordionItem[] = [
+  {
+    id: "cap-1",
+    icon: <Gauge size={18} />,
+    title: "Deterministic mock AI",
+    description: "Runs without a real OpenAI API key.",
+  },
+  {
+    id: "cap-2",
+    icon: <Send size={18} />,
+    title: "Mock GHL routing",
+    description: "Maps scored leads to CRM fields.",
+  },
+  {
+    id: "cap-3",
+    icon: <TableProperties size={18} />,
+    title: "Prisma + Supabase",
+    description: "Ready for Postgres persistence.",
+  },
+  {
+    id: "cap-4",
+    icon: <Activity size={18} />,
+    title: "Reporting view",
+    description: "Analytics, filters, and status changes.",
   },
 ];
 
@@ -74,7 +112,7 @@ export default function Home() {
 
           <div className="hero-actions">
             <Link className="primary-link" href="/dashboard">
-              View dashboard
+              View dispatch board
               <ArrowRight size={16} />
             </Link>
             <span className="runtime-note">Mock AI runs without an OpenAI key.</span>
@@ -89,37 +127,14 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="workflow-strip" aria-label="Workflow overview">
-            {steps.map((step, index) => (
-              <div className="workflow-step" key={step.title}>
-                <span className="step-index">{String(index + 1).padStart(2, "0")}</span>
-                <strong>{step.title}</strong>
-                <span>{step.text}</span>
-              </div>
-            ))}
+          <div className="accordion-group">
+            <p className="accordion-group-label">Workflow</p>
+            <Accordion ariaLabel="Workflow overview" defaultOpenId="step-1" items={stepItems} />
           </div>
 
-          <div className="feature-grid">
-            <div className="panel metric-card">
-              <Gauge size={22} />
-              <h3>Deterministic mock AI</h3>
-              <p className="table-secondary">Runs without a real OpenAI API key.</p>
-            </div>
-            <div className="panel metric-card">
-              <Send size={22} />
-              <h3>Mock GHL routing</h3>
-              <p className="table-secondary">Maps scored leads to CRM fields.</p>
-            </div>
-            <div className="panel metric-card">
-              <TableProperties size={22} />
-              <h3>Prisma + Supabase</h3>
-              <p className="table-secondary">Ready for Postgres persistence.</p>
-            </div>
-            <div className="panel metric-card">
-              <Activity size={22} />
-              <h3>Reporting view</h3>
-              <p className="table-secondary">Analytics, filters, and status changes.</p>
-            </div>
+          <div className="accordion-group">
+            <p className="accordion-group-label">Under the hood</p>
+            <Accordion ariaLabel="Demo capabilities" items={capabilityItems} />
           </div>
         </div>
 

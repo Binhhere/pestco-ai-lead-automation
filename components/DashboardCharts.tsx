@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@astryxdesign/core/Card";
+import { Card } from "@/components/ui/Card";
 import {
   Bar,
   BarChart,
@@ -26,16 +26,29 @@ export function DashboardCharts({ leads }: Props) {
   );
 
   return (
-    <Card padding={0}>
+    <Card>
       <div className="chart-card">
         <h3>Conversion funnel</h3>
         <ResponsiveContainer width="100%" height={245}>
           <BarChart data={statusData} margin={{ left: -20, right: 10, top: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#dce3dd" />
-            <XAxis dataKey="status" tick={{ fontSize: 11 }} />
-            <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
-            <Tooltip />
-            <Bar dataKey="leads" fill="#1f7a4d" radius={[6, 6, 0, 0]} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#cabf99" />
+            <XAxis
+              dataKey="status"
+              tick={{ fontSize: 11, fill: "#5b5744", fontFamily: "var(--font-mono)" }}
+            />
+            <YAxis
+              allowDecimals={false}
+              tick={{ fontSize: 12, fill: "#5b5744", fontFamily: "var(--font-mono)" }}
+            />
+            <Tooltip
+              contentStyle={{
+                background: "#f7f2e4",
+                border: "1.5px solid #a4956a",
+                borderRadius: 3,
+                fontFamily: "var(--font-body)",
+              }}
+            />
+            <Bar dataKey="leads" fill="#b8531f" radius={[2, 2, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

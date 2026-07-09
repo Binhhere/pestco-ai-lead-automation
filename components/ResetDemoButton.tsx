@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@astryxdesign/core/Button";
+import { Button } from "@/components/ui/Button";
 
 type Props = {
   onReset: () => Promise<void>;

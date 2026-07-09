@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@astryxdesign/core/Button";
+import { Button } from "@/components/ui/Button";
 import type { LeadRecord } from "@/lib/types";
 import { formatEnumLabel } from "@/lib/utils";
 import { StatusBadge } from "./StatusBadge";

@@ -1,8 +1,27 @@
 import type { Metadata } from "next";
-import "@astryxdesign/core/reset.css";
-import "@astryxdesign/core/astryx.css";
-import "@astryxdesign/theme-neutral/theme.css";
+import { Oswald, IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
+
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "PestCo AI Lead Automation",
@@ -16,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${oswald.variable} ${plexMono.variable} ${inter.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Card } from "@astryxdesign/core/Card";
+import { Card } from "@/components/ui/Card";
 import { AnalyticsCards } from "@/components/AnalyticsCards";
 import { DashboardCharts } from "@/components/DashboardCharts";
 import { LeadTable } from "@/components/LeadTable";
@@ -92,8 +92,8 @@ export function DashboardClient() {
     <>
       <div className="dashboard-header">
         <div>
-          <p className="eyebrow">CRM operations</p>
-          <h1>PestCo lead command center</h1>
+          <p className="eyebrow">Dispatch operations</p>
+          <h1>PestCo dispatch board</h1>
           <p className="lede">
             Track lead score, urgency, pipeline status, AI recommendations, and
             automation activity from one recruiter-friendly dashboard.
@@ -105,7 +105,7 @@ export function DashboardClient() {
       <AnalyticsCards leads={leads} />
 
       <div className="dashboard-main">
-        <Card padding={0}>
+        <Card>
           <div className="panel-header">
             <div>
               <h2>Qualified lead queue</h2>
@@ -152,7 +152,7 @@ export function DashboardClient() {
 
         <div>
           <DashboardCharts leads={leads} />
-          <Card padding={0}>
+          <Card>
             <div className="panel-body">
               <h3>Automation rule</h3>
               <p className="table-secondary">

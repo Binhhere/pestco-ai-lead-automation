@@ -1,8 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Button } from "@astryxdesign/core/Button";
-import { Badge } from "@astryxdesign/core/Badge";
+import { Button } from "@/components/ui/Button";
+import { Badge } from "@/components/ui/Badge";
 import type { LeadInput } from "@/lib/validations";
 
 const initialForm: LeadInput = {
@@ -60,8 +60,8 @@ export function LeadForm() {
   return (
     <section className="lead-form-card" aria-labelledby="lead-form-title">
       <div className="lead-form-topline">
-        <Badge label="Lead intake" variant="success" />
-        <span>CRM-ready routing</span>
+        <Badge label="Lead intake" tone="hazard" />
+        <span>Work order &middot; CRM-ready</span>
       </div>
       <div className="panel-header form-panel-header">
         <div>
@@ -77,6 +77,7 @@ export function LeadForm() {
           <strong>75+</strong>
         </div>
       </div>
+      <div className="ticket-perforation" aria-hidden="true" />
       <form className="panel-body" onSubmit={handleSubmit}>
         <div className="form-grid">
           <div className="form-field">

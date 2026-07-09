@@ -1,4 +1,4 @@
-import { Card } from "@astryxdesign/core/Card";
+import { Card } from "@/components/ui/Card";
 import type { LeadRecord } from "@/lib/types";
 import { toPercent } from "@/lib/utils";
 
@@ -26,7 +26,7 @@ export function AnalyticsCards({ leads }: Props) {
   return (
     <div className="dashboard-grid">
       {cards.map((card) => (
-        <Card key={card.label} padding={0}>
+        <Card key={card.label}>
           <div className="metric-card">
             <div className="metric-label">{card.label}</div>
             <div className="metric-value">{card.value}</div>

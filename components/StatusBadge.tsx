@@ -1,4 +1,4 @@
-import { Badge } from "@astryxdesign/core/Badge";
+import { Badge } from "@/components/ui/Badge";
 import { formatEnumLabel } from "@/lib/utils";
 
 type Props = {
@@ -6,14 +6,14 @@ type Props = {
 };
 
 export function StatusBadge({ status }: Props) {
-  const variant =
+  const tone =
     status === "Closed"
-      ? "success"
+      ? "safe"
       : status === "InspectionScheduled" || status === "Qualified"
-        ? "warning"
+        ? "hazard"
         : status === "Contacted"
           ? "info"
           : "neutral";
 
-  return <Badge label={formatEnumLabel(status)} variant={variant} />;
+  return <Badge label={formatEnumLabel(status)} tone={tone} />;
 }

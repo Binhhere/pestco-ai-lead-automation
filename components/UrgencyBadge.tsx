@@ -1,12 +1,11 @@
-import { Badge } from "@astryxdesign/core/Badge";
+import { Badge } from "@/components/ui/Badge";
 
 type Props = {
   urgency: "low" | "medium" | "high";
 };
 
 export function UrgencyBadge({ urgency }: Props) {
-  const variant =
-    urgency === "high" ? "error" : urgency === "medium" ? "warning" : "success";
+  const tone = urgency === "high" ? "alert" : urgency === "medium" ? "hazard" : "safe";
 
-  return <Badge label={urgency} variant={variant} />;
+  return <Badge label={urgency} tone={tone} />;
 }
